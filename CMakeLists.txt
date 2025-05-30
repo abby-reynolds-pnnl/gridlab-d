@@ -442,3 +442,5 @@ install(TARGETS
 )
 
 include(cmake/CPackConfig.cmake)
+
+add_subdirectory(python_bindings)

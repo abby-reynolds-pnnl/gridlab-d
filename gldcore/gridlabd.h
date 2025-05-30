@@ -130,7 +130,7 @@ CDECL EXTERN CALLBACKS *callback INIT(NULL);
 /******************************************************************************
  * Variable publishing
  */
-/**	@defgroup gridlabd_h_publishing Publishing variables
+/**	@defgroup 																																																																																																																																																																																																																																																																																								h_publishing Publishing variables
 
 	Modules must register public variables that are accessed by other modules, and the core by publishing them.
 
