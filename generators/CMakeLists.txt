@@ -20,12 +20,16 @@ add_library(${GLD_MODULE_NAME}
         main.cpp
         rectifier.cpp
         rectifier.h
+        sec_control.cpp
+        sec_control.h
         solar.cpp
         solar.h
         sync_ctrl.cpp
         sync_ctrl.h
         windturb_dg.cpp
         windturb_dg.h
+	cblock.cpp
+	cblock.h
         )
 
 set_target_properties(${GLD_MODULE_NAME} PROPERTIES PREFIX "")

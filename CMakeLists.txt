@@ -1,24 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
 project(GridLAB-D)
 
-OPTION(GLD_WARNING_WORK "Make warnings more pedantic" OFF)
-if (GLD_WARNING_WORK)
-    if (MSVC)
-        SET(GLD_COMPILE_OPTIONS
-                "/W4"
-                "/WX"
-                CACHE INTERNAL
-                "GLD_COMPILE_OPTIONS"
-        )
-    else ()
-        SET(GLD_COMPILE_OPTIONS
-                "-Wall"
-                "-Wextra"
-                "-pedantic"
-                CACHE INTERNAL
-                "GLD_COMPILE_OPTIONS"
-        )
-    endif ()
+include(cmake/Warnings.cmake)
+OPTION(GLD_EXTRA_WARNINGS "Make warnings more pedantic" OFF)
+if (GLD_EXTRA_WARNINGS)
+    set(GLD_COMPILE_OPTIONS ${WARNING_FLAGS} CACHE INTERNAL "GLD_COMPILE_OPTIONS")
 else ()
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         # TODO: resolve these warnings and un-supress them
@@ -129,7 +115,7 @@ if (WIN32 OR MSYS OR MINGW OR CYGWIN)
     FetchContent_Declare(
             dlfcn-win32
             GIT_REPOSITORY https://github.com/dlfcn-win32/dlfcn-win32.git
-            GIT_TAG v1.3.1
+            GIT_TAG v1.4.2
     )
     FetchContent_MakeAvailable(dlfcn-win32)
     include_directories(${dlfcn-win32_SOURCE_DIR}/src)
@@ -212,7 +198,9 @@ set(HEADER_FILE_NAMES
         ${CMAKE_SOURCE_DIR}/gldcore/property.h
         ${CMAKE_SOURCE_DIR}/gldcore/schedule.h
         ${CMAKE_SOURCE_DIR}/gldcore/test.h
+	${CMAKE_SOURCE_DIR}/gldcore/gldapi.h
 )
+
 file(COPY ${HEADER_FILE_NAMES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/headers)
 list(APPEND HEADER_FILE_NAMES
         ${CMAKE_CURRENT_BINARY_DIR}/headers/build.h
@@ -306,6 +294,8 @@ if (GLD_USE_SUPERLU)
     if (WIN32 OR MSYS OR MINGW OR CYGWIN)
         # The CBLAS version provided by SuperLU does not build in MSYS2.
         option(enable_internal_blaslib "Build the CBLAS library" OFF)
+    else ()
+        option(enable_internal_blaslib "Build the CBLAS library" ON)
     endif ()
 
     # SuperLU's generic names here can cause issues, make sure other projects do not cross these names
@@ -364,6 +354,7 @@ set(GLD_LIBS
         climate
         commercial
         connection
+	gldapi
         generators
         market
         mysql
