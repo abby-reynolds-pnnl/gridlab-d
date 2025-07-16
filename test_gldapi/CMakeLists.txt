@@ -20,5 +20,9 @@ message(STATUS "GridLABD_LIBRARIES=${GridLABD_LIBRARIES}")
 add_executable(test_gldapi test_gldapi.cpp)
 target_link_libraries(test_gldapi ${GridLABD_LIBRARIES})
 
-install(TARGETS test_gldapi
+# Add Catch2 for unit testing
+add_executable(test_gldapi_catch test_gldapi_catch.cpp)
+target_link_libraries(test_gldapi_catch ${GridLABD_LIBRARIES})
+
+install(TARGETS test_gldapi test_gldapi_catch
         RUNTIME DESTINATION bin)
