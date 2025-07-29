@@ -328,6 +328,9 @@ option(GLD_USE_PYTHON_BINDINGS "Enable Python bindings with Nanobind" OFF)
 if (GLD_USE_PYTHON_BINDINGS)
     find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
+    # User must provide the path to the Nanobind headers
+    # Where is library installed?
+    # Include, lib, and bin directories
     find_path(NANOBIND_INCLUDE_DIR nanobind/nanobind.h
               PATHS /usr/local/include /usr/include
               NO_DEFAULT_PATH)

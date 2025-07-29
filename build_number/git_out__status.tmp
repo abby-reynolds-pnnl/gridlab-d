@@ -1,0 +1,10 @@
+ D ../third_party/nanobind
+?? ../HAVE_CPU_SET_MACROS.cc
+?? ../HAVE_CPU_SET_T.cc
+?? ../HAVE_DYN_PROC_AFFINITY.cc
+?? ../HAVE_GET_NPROCS.cc
+?? ../HAVE_ISFINITE.cc
+?? ../HAVE_PTHREAD_PRIO_INHERIT.cc
+?? ../HAVE___SYNC_ADD_AND_FETCH.cc
+?? ../HAVE___SYNC_BOOL_COMPARE_AND_SWAP.cc
+?? ./

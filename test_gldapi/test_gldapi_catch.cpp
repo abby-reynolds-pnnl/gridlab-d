@@ -10,12 +10,12 @@ GLDErrorCode dummy_callback(GridLabD* gld) {
 
 TEST_CASE("Set config file", "[gldapi]") {
     GridLabD sim;
-    REQUIRE(sim.set_config_file("config.cfg") == GLD_SUCCESS);
+    REQUIRE((sim.set_config_file("config.cfg") == GLD_SUCCESS));
 }
 
 TEST_CASE("Load GLM", "[gldapi]") {
     GridLabD sim;
-    REQUIRE(sim.load_glm("example.glm") == GLD_SUCCESS);
+    REQUIRE((sim.load_glm("example.glm") == GLD_SUCCESS));
 }
 
 TEST_CASE("Add, Delete, Edit Object", "[gldapi]") {
