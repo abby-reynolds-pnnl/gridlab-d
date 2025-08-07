@@ -323,40 +323,41 @@ endif ()
 set(BUILD_SHARED_LIBS ${BUILD_SHARED_CACHE})
 
 # Add option for Python bindings
-option(GLD_USE_PYTHON_BINDINGS "Enable Python bindings with Nanobind" OFF)
 
-if (GLD_USE_PYTHON_BINDINGS)
-    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+# option(GLD_USE_PYTHON_BINDINGS "Enable Python bindings with Nanobind" OFF)
 
-    find_path(NANOBIND_INCLUDE_DIR nanobind/nanobind.h
-              PATHS /usr/local/include /usr/include
-              NO_DEFAULT_PATH)
+# if (GLD_USE_PYTHON_BINDINGS)
+#     find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
-    if (NANOBIND_INCLUDE_DIR)
-        # Nanobind headers found on the system
-        include_directories(${NANOBIND_INCLUDE_DIR})
-        message(STATUS "Using system-installed Nanobind at ${NANOBIND_INCLUDE_DIR}")
-    else ()
-        # Fallback: fetch Nanobind
-        message(STATUS "Nanobind not found system-wide. Fetching Nanobind...")
+#     find_path(NANOBIND_INCLUDE_DIR nanobind/nanobind.h
+#               PATHS /usr/local/include /usr/include
+#               NO_DEFAULT_PATH)
 
-        FetchContent_Declare(
-            nanobind
-            GIT_REPOSITORY https://github.com/wjakob/nanobind.git
-            GIT_TAG v2.7.0
-        )
-        FetchContent_MakeAvailable(nanobind)
+#     if (NANOBIND_INCLUDE_DIR)
+#         # Nanobind headers found on the system
+#         include_directories(${NANOBIND_INCLUDE_DIR})
+#         message(STATUS "Using system-installed Nanobind at ${NANOBIND_INCLUDE_DIR}")
+#     else ()
+#         # Fallback: fetch Nanobind
+#         message(STATUS "Nanobind not found system-wide. Fetching Nanobind...")
 
-        include_directories(${nanobind_SOURCE_DIR}/include)
-        message(STATUS "Using fetched Nanobind from ${nanobind_SOURCE_DIR}")
-    endif ()
+#         FetchContent_Declare(
+#             nanobind
+#             GIT_REPOSITORY https://github.com/wjakob/nanobind.git
+#             GIT_TAG v2.7.0
+#         )
+#         FetchContent_MakeAvailable(nanobind)
 
-    add_subdirectory(python_bindings)
+#         include_directories(${nanobind_SOURCE_DIR}/include)
+#         message(STATUS "Using fetched Nanobind from ${nanobind_SOURCE_DIR}")
+#     endif ()
 
-    message(STATUS "Python bindings enabled and nanobind integrated.")
-else ()
-    message(STATUS "Python bindings are disabled.")
-endif ()
+#     add_subdirectory(python_bindings)
+
+#     message(STATUS "Python bindings enabled and nanobind integrated.")
+# else ()
+#     message(STATUS "Python bindings are disabled.")
+# endif ()
 
 # Configure module targets
 add_subdirectory(assert)
@@ -368,6 +369,7 @@ add_subdirectory(market)
 add_subdirectory(mysql)
 add_subdirectory(optimize)
 add_subdirectory(powerflow)
+add_subdirectory(python_bindings)
 add_subdirectory(reliability)
 add_subdirectory(residential)
 add_subdirectory(tape)

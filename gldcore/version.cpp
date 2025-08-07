@@ -48,7 +48,7 @@ unsigned int version_patch(void)
 }
 unsigned int version_build(void)
 {
-	return BUILDNUM;
+	return 0; // BUILDNUM;
 }
 
 const char *version_branch(void)

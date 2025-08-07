@@ -4,7 +4,7 @@
 #include "gldapi.h"
 
 namespace nb = nanobind;
-
+using namespace nb::literals;
 // If you want to expose enums as bitfield values, you can do that as well.
 
 NB_MODULE(gridlabd_python, m) {

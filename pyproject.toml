@@ -1,0 +1,14 @@
+[build-system]
+requires = ["scikit-build-core[pyproject]>=0.5.0", "nanobind"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "gridlabd"
+version = "0.1.0"
+description = "GridLAB-D Python bindings"
+authors = [{name="Abby Reynolds", email="abby.reynolds@pnnl.gov"}]
+readme = "README.md"
+dependencies = []
+
+[tool.scikit-build]
+wheel.packages = ["pylib/gridlabd"]
