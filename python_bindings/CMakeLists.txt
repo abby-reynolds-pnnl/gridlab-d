@@ -23,7 +23,6 @@ target_include_directories(gridlabd_py PRIVATE
 
 target_link_libraries(gridlabd_py PRIVATE nanobind ${Python3_LIBRARIES})
 
-# This is KEY: output the .so to the source package dir!
 set_target_properties(gridlabd_py PROPERTIES
     PREFIX ""
     OUTPUT_NAME "gridlabd"
@@ -31,10 +30,8 @@ set_target_properties(gridlabd_py PROPERTIES
     SUFFIX ".so"
 )
 
-# Make sure the output dir exists before build (important for clean tree builds)
 file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/pylib/gridlabd")
 
-# If you want to be *extra* sure, you can also add a post-build copy (redundant if you get the output dir right):
 add_custom_command(TARGET gridlabd_py POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          $<TARGET_FILE:gridlabd_py>

@@ -5,7 +5,6 @@
 
 namespace nb = nanobind;
 using namespace nb::literals;
-// If you want to expose enums as bitfield values, you can do that as well.
 
 NB_MODULE(gridlabd_python, m) {
     nb::enum_<GLDErrorCode>(m, "GLDErrorCode")
@@ -48,6 +47,5 @@ NB_MODULE(gridlabd_python, m) {
             auto ret = self.step(time);
             return std::make_tuple(ret, time);
         }, "simulation_time"_a)
-        // Add more bindings as needed, omitting GLDData/Callback methods for now
         ;
 }
