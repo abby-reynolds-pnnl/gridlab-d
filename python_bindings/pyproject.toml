@@ -1,0 +1,18 @@
+[build-system]
+requires = ["scikit-build-core>=0.4.3", "nanobind>=1.3.2"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "gridlabd"
+version = "0.0.1"
+description = "Python bindings for the GridLAB-D API"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{ name = "Abby Reynolds", email = "abby.reynolds@pnnl.gov" }]
+
+[tool.scikit-build]
+minimum-version = "0.4"
+build-dir = "build/{wheel_tag}"
+wheel.py-api = "cp312"
+# Tell scikit-build-core where the Python package lives (relative to this file)
+wheel.packages = ["src/gridlabd"]
