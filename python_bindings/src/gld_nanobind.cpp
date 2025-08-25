@@ -1,15 +1,12 @@
 #include <nanobind/nanobind.h>
-#include <nanobind/stl/string.h>   // conversions for std::string
-// If you later bind containers, include more from nanobind/stl/*
-
-#include "gldapi.h"  // relative to python_bindings/ via the include dirs we set
+#include <nanobind/stl/string.h>   
+#include "gldapi.h"
 
 namespace nb = nanobind;
 
 NB_MODULE(_gridlabd_impl, m) {
     m.doc() = "GridLAB-D nanobind bindings (minimal)";
 
-    // Keep your smoke-test
     m.def("hello", []() { return "Hello from GridLAB-D bindings!"; });
 
     // Bind enums

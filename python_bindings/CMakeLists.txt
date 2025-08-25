@@ -10,7 +10,6 @@ find_package(Python 3.8 REQUIRED COMPONENTS Interpreter Development.Module OPTIO
 find_package(nanobind CONFIG REQUIRED)
 
 # Build a local static library from the API implementation
-# Only include the minimal source you need for the bindings right now
 add_library(gldcore_local STATIC
   ${CMAKE_CURRENT_SOURCE_DIR}/../gldcore/gldapi.cpp
 )
@@ -21,10 +20,6 @@ set_target_properties(gldcore_local PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_include_directories(gldcore_local PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/../gldcore
 )
-
-# If gldapi.cpp later needs other sources or libraries, add them here:
-# target_sources(gldcore_local PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../gldcore/other.cpp)
-# target_link_libraries(gldcore_local PUBLIC some_dep)
 
 # Build the nanobind extension
 nanobind_add_module(
