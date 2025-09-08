@@ -11,14 +11,13 @@ find_package(nanobind CONFIG REQUIRED)
 
 # Build a local static library from the API implementation
 add_library(gldcore_local STATIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/../gldcore/gldapi.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/cpp/gldcore/gldapi.cpp
 )
-# Ensure it can be linked into a shared module
 set_target_properties(gldcore_local PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-# Headers live in ../gldcore
+# Headers live in cpp/gldcore
 target_include_directories(gldcore_local PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR}/../gldcore
+  ${CMAKE_CURRENT_SOURCE_DIR}/cpp/gldcore
 )
 
 # Build the nanobind extension

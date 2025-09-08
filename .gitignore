@@ -122,3 +122,6 @@ scratch/*
 
 # python env
 .venv/
+
+# pypi api tokens
+test.pypi api token.rtf

@@ -14,5 +14,13 @@ authors = [{ name = "Abby Reynolds", email = "abby.reynolds@pnnl.gov" }]
 minimum-version = "0.4"
 build-dir = "build/{wheel_tag}"
 wheel.py-api = "cp312"
-# Tell scikit-build-core where the Python package lives (relative to this file)
 wheel.packages = ["src/gridlabd"]
+
+[tool.scikit-build.sdist]
+include = [
+  "CMakeLists.txt",
+  "pyproject.toml",
+  "README.md",
+  "src/**",
+  "cpp/**",
+]
