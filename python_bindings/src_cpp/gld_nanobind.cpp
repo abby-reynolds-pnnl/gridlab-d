@@ -44,7 +44,7 @@ nb::dict runtime_info() {
 
 } // namespace
 
-NB_MODULE(gridlabd_core, m) {
+NB_MODULE(_gridlabd_impl, m) {
     m.doc() = "GridLAB-D Python bindings using the public C++ API";
 
     m.def("hello", []() {

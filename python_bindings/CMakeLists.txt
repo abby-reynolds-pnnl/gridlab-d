@@ -22,35 +22,35 @@ endif()
 
 # Create the Python module
 nanobind_add_module(
-    gridlabd_core
+    _gridlabd_impl
     src_cpp/gld_nanobind.cpp
 )
 
 # Add include directories
-target_include_directories(gridlabd_core PRIVATE 
+target_include_directories(_gridlabd_impl PRIVATE 
     ${GRIDLABD_INCLUDE_DIR}
     ${GRIDLABD_ROOT}/third_party
     ${JSONCPP_INCLUDE_DIR}
 )
 
 # Link against GridLAB-D API library and dependencies
-target_link_libraries(gridlabd_core PRIVATE 
+target_link_libraries(_gridlabd_impl PRIVATE 
     ${GRIDLABD_LIB_DIR}/libgldapi.so
     ${GRIDLABD_LIB_DIR}/static/libjsoncpp.a
 )
 
 # Set RPATH for the module to find the shared library
-set_target_properties(gridlabd_core PROPERTIES
+set_target_properties(_gridlabd_impl PROPERTIES
     INSTALL_RPATH_USE_LINK_PATH FALSE
     INSTALL_RPATH "\$ORIGIN"
     BUILD_WITH_INSTALL_RPATH TRUE
 )
 
 # Set module properties
-target_compile_definitions(gridlabd_core PRIVATE VERSION_INFO=${SKBUILD_PROJECT_VERSION})
+target_compile_definitions(_gridlabd_impl PRIVATE VERSION_INFO=${SKBUILD_PROJECT_VERSION})
 
 # Install the module and the shared library to the same directory
-install(TARGETS gridlabd_core
+install(TARGETS _gridlabd_impl
     LIBRARY DESTINATION gridlabd
     RUNTIME DESTINATION gridlabd)
 
@@ -63,13 +63,32 @@ install(CODE "file(MAKE_DIRECTORY \${CMAKE_INSTALL_PREFIX}/gridlabd_bundle/bin)"
 install(CODE "file(MAKE_DIRECTORY \${CMAKE_INSTALL_PREFIX}/gridlabd_bundle/lib)")
 
 # Install additional libraries to bundle
-set(ADDITIONAL_LIBS
+set(GRIDLABD_MODULE_LIBS
     libgldcore.so
+    powerflow.so
+    residential.so
+    commercial.so
+    climate.so
+    generators.so
+    connection.so
+    market.so
+    reliability.so
+    optimize.so
+    tape.so
+    tape_file.so
+    tape_plot.so
+    glxengine.so
+    glsolvers.so
+    mysql.so
+    assert.so
+    script.so
 )
 
-foreach(lib ${ADDITIONAL_LIBS})
-    if(EXISTS "${GRIDLABD_LIB_DIR}/${lib}")
-        install(FILES "${GRIDLABD_LIB_DIR}/${lib}"
-                DESTINATION gridlabd_bundle/lib)
+foreach(lib ${GRIDLABD_MODULE_LIBS})
+    set(src "${GRIDLABD_LIB_DIR}/${lib}")
+    if (EXISTS "${src}")
+        install(FILES "${src}" DESTINATION gridlabd_bundle/lib)
+    else()
+        message(WARNING "Expected GridLAB-D module not found: ${src}")
     endif()
 endforeach()
